@@ -5,7 +5,7 @@ var path = require('path')
 module.exports = {
   context: path.join(__dirname, './'),
   entry: {
-    test: path.join(__dirname, './test_practice.jsx'),
+    test: path.join(__dirname, './index.jsx'),
     vendor: [
       'redux',
       'react',
