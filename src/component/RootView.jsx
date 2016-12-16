@@ -88,13 +88,13 @@ var mapDispatchToProps = (dispatch) => bindActionCreators({
     setMethod(method){
         return {
             type: CONSTANT.SET_METHOD,
-            preload: method
+            payload: method
         };
     },
     setResultAll(originalFormula, method, resultFormula){
         return {
             type: CONSTANT.SET_RESULT_ALL,
-            preload:{
+            payload:{
                 originalFormula,
                 method,
                 resultFormula
@@ -104,14 +104,14 @@ var mapDispatchToProps = (dispatch) => bindActionCreators({
     setProcess(mapObj){
         return {
             type:CONSTANT.SET_PROCESS_LIST_ALL,
-            preload:mapObj
+            payload:mapObj
         };
     },
     changeProcessItem(index, whichone){
         return {
             type:'processList/'+whichone,
             index:index,
-            preload: 'this is a '+whichone.substring(3)
+            payload: 'this is a '+whichone.substring(3)
         }
     },
     increaseAge(index){

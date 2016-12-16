@@ -12,13 +12,16 @@ import {actionTypeIn, actionTypeIs} from '../actionType.js';
 
 
 var originalFormulaReducer = (state='', action)=>{
-    return takeWhileTrue(originalFormulaCase,allResultSetCase('originalFormula'))(state,action) || state;
+    var nextState = takeWhileTrue(originalFormulaCase,allResultSetCase('originalFormula'))(state,action);
+    return nextState === false ? state:nextState;
 };
 var methodReducer = (state='',action)=>{
-    return takeWhileTrue(methodCase,allResultSetCase('method'))(state,action) || state;
+    var nextState = takeWhileTrue(methodCase, allResultSetCase('method'))(state,action);
+    return nextState === false ? state:nextState;
 }
 var resultFormulaReducer = (state='',action)=>{
-    return takeWhileTrue(resultFormulaCase,allResultSetCase('resultFormula'))(state,action) || state;
+    var nextState = takeWhileTrue(resultFormulaCase, allResultSetCase('resultFormula'))(state,action);
+    return nextState === false ? state:nextState;
 }
 var processListReducer = (state = [], action) => {
     return takeWhileTrue(
@@ -27,7 +30,8 @@ var processListReducer = (state = [], action) => {
         )(state,action) || state;
 };
 var processMsgReducer = (state='', action)=>{
-    return takeWhileTrue(processMsgCase)(state, action) || state
+    var nextState = takeWhileTrue(processMsgCase)(state,action);
+    return nextState === false ? state:nextState;
 }
 var processReducer = combineReducers({
     list: processListReducer,

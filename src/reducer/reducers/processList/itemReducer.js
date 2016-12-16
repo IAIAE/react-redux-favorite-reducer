@@ -10,7 +10,7 @@ var actionCreator = (creator) => (type) => (state='',action)=>{
     }
 }
 var plainActionCreator = actionCreator((state, action)=>{
-    return action.preload;
+    return action.payload;
 });
 var name = plainActionCreator('processList/setName'),
     detail = plainActionCreator('processList/setDetail');

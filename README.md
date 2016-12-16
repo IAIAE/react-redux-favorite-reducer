@@ -39,9 +39,13 @@ var nameReducer = combineReducer({
 /**
  * firstNameReducer
  * takeWhileTrue return the first case that return is not false. if all the case not match, takeWhileTrue will return false also.
+ * @bugfix sometimes i use:
+ * return takeWhileTrue(someCase)(state, action) || state;
+ * if takeWhileTrue return '', it's a right next state, but this expression will return the old state still.
  */
 var firstNameReducer = (state='', action) => {
-    return takeWhileTrue(firstNameCase)(state, action) || state;
+    var nextState = takeWhileTrue(firstNameCase)(state, action);
+    return nextState===false? state: nextState;
 } 
 
 /**
@@ -50,7 +54,7 @@ var firstNameReducer = (state='', action) => {
  * a Case determin whether a action is in it's case, if ture return nextState, otherwise return false
  */
 var firstNameCase = (state, action) => {
-    return (actionTypeIs(action.type, 'setFirstName')) && action.preload;
+    return (actionTypeIs(action.type, 'setFirstName')) && action.payload;
 } 
 ```
 
@@ -61,7 +65,7 @@ var payListReducer = (state=[], action) => {
 }
 
 var wholeListCase = (state, action) => {
-    return (actionTypeIs(action.type, 'setPayList')) && action.preload;
+    return actionTypeIs(action.type, 'setPayList') && action.payload;
 }
 
 var listItemCase = (state, action) => {
